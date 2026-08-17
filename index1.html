@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Black Funded - Select Your Account</title>
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --card-bg: #161c28;
+      --border: #262f40;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #fff 0%, #888 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .pricing-container {
+      display: flex;
+      gap: 2rem;
+      max-width: 900px;
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      width: 320px;
+      text-align: center;
+      transition: transform 0.2s, border-color 0.2s;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+    }
+
+    .card.selected {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    }
+
+    .badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: #fff;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: bold;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    .account-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .price {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+    }
+
+    .price span {
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-weight: normal;
+    }
+
+    .features {
+      list-style: none;
+      margin-bottom: 2rem;
+      text-align: left;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .features li {
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .features li::before {
+      content: "✓";
+      color: var(--accent);
+      margin-right: 0.5rem;
+      font-weight: bold;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 0.85rem;
+      background-color: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn:hover {
+      background-color: var(--accent-hover);
+    }
+
+    /* Checkout Modal / Section */
+    .checkout-section {
+      display: none;
+      margin-top: 3rem;
+      width: 100%;
+      max-width: 500px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+
+    .checkout-section.active {
+      display: block;
+    }
+
+    .checkout-section h2 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .payment-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .payment-btn {
+      padding: 1rem;
+      background: #0d1117;
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: border-color 0.2s;
+    }
+
+    .payment-btn:hover {
+      border-color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Black Funded</h1>
+    <p>Select your preferred evaluation account to continue</p>
+  </header>
+
+  <main class="pricing-container">
+    <!-- 50k Account Card -->
+    <div class="card" id="card-50k">
+      <div class="account-title">50K Account</div>
+      <div class="price">$30 <span>/ one-time</span></div>
+      <ul class="features">
+        <li>$50,000 Virtual Balance</li>
+        <li>100% Profit Split Option</li>
+        <li>No Time Limit</li>
+        <li>Instant Account Setup</li>
+      </ul>
+      <button class="btn" onclick="selectAccount('50k Account', 30, 'card-50k')">Select Plan</button>
+    </div>
+
+    <!-- 100k Account Card -->
+    <div class="card" id="card-100k">
+      <div class="badge">Most Popular</div>
+      <div class="account-title">100K Account</div>
+      <div class="price">$70 <span>/ one-time</span></div>
+      <ul class="features">
+        <li>$100,000 Virtual Balance</li>
+        <li>100% Profit Split Option</li>
+        <li>No Time Limit</li>
+        <li>Instant Account Setup</li>
+      </ul>
+      <button class="btn" onclick="selectAccount('100k Account', 70, 'card-100k')">Select Plan</button>
+    </div>
+  </main>
+
+  <!-- Checkout Section -->
+  <section class="checkout-section" id="checkout">
+    <h2>Checkout</h2>
+    <p>Selected Tier: <strong id="selected-tier">-</strong></p>
+    <p>Total: <strong id="selected-price">$0</strong></p>
+
+    <div class="payment-methods">
+      <!-- Replace onclick URLs with your actual payment gateway endpoints (e.g. Stripe, Coinbase, Crypto) -->
+      <button class="payment-btn" onclick="processPayment('Crypto')">
+        Pay with Crypto (USDT/BTC) <span>→</span>
+      </button>
+    </div>
+  </section>
+
+  <script>
+    function selectAccount(accountName, price, cardId) {
+      // Highlight selected card
+      document.querySelectorAll('.card').forEach(card => card.classList.remove('selected'));
+      document.getElementById(cardId).classList.add('selected');
+
+      // Update checkout details
+      document.getElementById('selected-tier').innerText = accountName;
+      document.getElementById('selected-price').innerText = '$' + price;
+
+      // Show checkout section and scroll down smoothly
+      const checkoutSection = document.getElementById('checkout');
+      checkoutSection.classList.add('active');
+      checkoutSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+  function processPayment(method) {
+  const tier = document.getElementById('selected-tier').innerText;
+
+  if (tier === '50k Account') {
+    window.location.href = 'https://your-50k-payment-link.com';
+  } else if (tier === '100k Account') {
+    window.location.href = 'https://your-100k-payment-link.com';
+  }
+}
+
+  </script>
+
+</body>
+</html>
